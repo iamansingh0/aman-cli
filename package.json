@@ -1,7 +1,7 @@
 {
 	"name": "aman-cli",
 	"description": "Use `aman help` command to see the usage",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"license": "UNLICENSED",
 	"bin": {
 		"aman-cli": "index.js",
