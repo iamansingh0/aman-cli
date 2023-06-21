@@ -23,7 +23,27 @@ const flags = {
 		type: `boolean`,
 		alias: `v`,
 		desc: `Print CLI version`
-	}
+	},
+	tl: {
+		type: 'boolean',
+		default: false,
+		desc: 'Get a quote related to technology',
+	},
+	ws: {
+		type: 'boolean',
+		default: false,
+		desc: 'Get a quote related to wisdom',
+	},
+	mv: {
+		type: 'boolean',
+		default: false,
+		desc: 'Get a quote related to motivation',
+	},
+	sc: {
+		type: 'boolean',
+		default: false,
+		desc: 'Get a quote related to science',
+	},
 };
 
 const commands = {
@@ -37,6 +57,7 @@ const helpText = meowHelp({
 	flags,
 	commands
 });
+console.log(helpText)
 
 const options = {
 	inferType: true,
