@@ -57,7 +57,7 @@ const helpText = meowHelp({
 	flags,
 	commands
 });
-console.log(helpText)
+// console.log(helpText)
 
 const options = {
 	inferType: true,
