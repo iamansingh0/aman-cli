@@ -28,7 +28,8 @@ const flags = {
 
 const commands = {
 	help: { desc: `working...` },
-	joke: { desc: `gets a random joke from a free api` }
+	joke: { desc: `gets a random joke from a free api` },
+	quote: { desc: `gets a random quote from an author` }
 };
 
 const helpText = meowHelp({
