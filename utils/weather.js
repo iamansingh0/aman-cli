@@ -1,6 +1,7 @@
 const { default: axios } = require("axios");
 
 const getLatLon = async (city, api) => {
+  console.log(city, api)
   const res = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${api}`);
   return res.data[0];
 };

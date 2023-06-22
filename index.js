@@ -17,6 +17,7 @@ const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
 const api = process.env.WEATHER_API
+
 const input = cli.input;
 const flags = cli.flags;
 const { clear, debug } = flags;
@@ -35,7 +36,7 @@ const { clear, debug } = flags;
 	else if (input[0] === 'quote') {
 		try {
 			let tag = '';
-
+			console.log(flags)
 			if (flags.tl) {
 				tag = 'technology';
 			} else if (flags.ws) {
@@ -45,7 +46,7 @@ const { clear, debug } = flags;
 			} else if (flags.sc) {
 				tag = 'science';
 			}
-
+			
 			if (tag) {
 				fetchQuote(tag);
 			} else {
@@ -58,6 +59,7 @@ const { clear, debug } = flags;
 	}
 	else if(input[0] === 'weather' && input[1]) {
 		const city = input[1]
+		// console.log(api, city)
 		fetchWeather(city, api);
 	}
 })();
