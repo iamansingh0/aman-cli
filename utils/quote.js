@@ -2,6 +2,7 @@ const axios = require('axios');
 const chalk = require('chalk');
 
 const fetchQuote = async (tag = 'wisdom', limit = 1) => {
+	console.log(tag)
     const { default: boxen } = await import('boxen');
 	try {
 		const response = await axios.get(

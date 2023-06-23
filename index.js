@@ -35,23 +35,8 @@ const { clear, debug } = flags;
 	else if (input[0] === 'quote') {
 		try {
 			let tag = '';
-			console.log(flags)
-			if (flags.tl) {
-				tag = 'technology';
-			} else if (flags.ws) {
-				tag = 'wisdom';
-			} else if (flags.mv) {
-				tag = 'motivational';
-			} else if (flags.sc) {
-				tag = 'science';
-			}
-			
-			if (tag) {
-				fetchQuote(tag);
-			} else {
-				fetchQuote();
-				// console.log(res.data[0])
-			}
+			flags.tl ? tag = 'technology' : flags.ws ? tag = 'wisdom' : flags.mv ? tag = 'motivational' : tag = 'science'
+			tag !== '' ? fetchQuote(tag) : fetchQuote();
 		} catch (error) {
 			console.log(error);
 		}
