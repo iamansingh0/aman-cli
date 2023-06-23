@@ -19,8 +19,6 @@ const fetchWeather = async (city, api) => {
   }
 }
 
-// const api = process.env.WEATHER_API
-// fetchData('Lucknow', api);
 module.exports = {
 	fetchWeather: fetchWeather
 };
