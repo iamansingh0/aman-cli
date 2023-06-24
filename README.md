@@ -12,4 +12,5 @@ npm install -g aman-cli
 aman help - See all the available options
 aman joke - Get a random joke
 aman quote - Get a random quote
+aman weather [city name] - To see the current weather of the city
 ```
