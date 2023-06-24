@@ -8,6 +8,19 @@ const getLatLon = async (city, api) => {
 	return res.data[0];
 };
 
+const farhToCelsius = (data) => {
+	const cels = data - 273.15;
+	return cels.toFixed(2);
+}
+
+const displayTemps = (data) => {
+	const temp = farhToCelsius(data.temp)
+	const feels_like = farhToCelsius(data.feels_like)
+	const temp_min = farhToCelsius(data.temp_min)
+	const temp_max = farhToCelsius(data.temp_max)
+	console.log(`Current Temp: ${temp} | Feels Like: ${feels_like}\nMaximum Temp: ${temp_max} | Minimum Temp: ${temp_min}`)
+}
+
 const displayCountryCity = (city, countryCode) => {
 	const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
 	console.log(`Country: ${regionNames.of(countryCode)}\nCity: ${city}`);
@@ -23,6 +36,8 @@ const displayWeatherDesc = desc => {
   console.log(str2)
 };
 
+
+
 const fetchWeather = async (city, api) => {
 	try {
 		const data = await getLatLon(city, api);
@@ -33,11 +48,12 @@ const fetchWeather = async (city, api) => {
 			`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api}`
 		);
 		const weatherData = res.data;
-		// console.log(weatherData);
-		console.log('______________________________');
+		console.log(weatherData.main);
+		console.log('______________________________\n');
 		displayCountryCity(weatherData.name, weatherData.sys.country);
-    displayWeatherDesc(weatherData.weather[0].description)
-		// const tempData =
+    	displayWeatherDesc(weatherData.weather[0].description)
+		displayTemps(weatherData.main);
+		console.log("\n")
 	} catch (e) {
 		console.log(e);
 	}
