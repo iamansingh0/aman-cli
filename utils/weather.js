@@ -10,7 +10,7 @@ const getLatLon = async (city, api) => {
 
 const farhToCelsius = (data) => {
 	const cels = data - 273.15;
-	return cels.toFixed(2);
+	return cels.toFixed(1);
 }
 
 const displayTemps = (data) => {
@@ -18,7 +18,9 @@ const displayTemps = (data) => {
 	const feels_like = farhToCelsius(data.feels_like)
 	const temp_min = farhToCelsius(data.temp_min)
 	const temp_max = farhToCelsius(data.temp_max)
-	console.log(`Current Temp: ${temp} | Feels Like: ${feels_like}\nMaximum Temp: ${temp_max} | Minimum Temp: ${temp_min}`)
+	const humidity = data.humidity
+	console.log(`Current Temp: ${temp} °C | Feels Like: ${feels_like} °C\nMaximum Temp: ${temp_max} °C | Minimum Temp: ${temp_min} °C`)
+	console.log(`Humidity: ${humidity}%`)
 }
 
 const displayCountryCity = (city, countryCode) => {
@@ -41,7 +43,6 @@ const displayWeatherDesc = desc => {
 const fetchWeather = async (city, api) => {
 	try {
 		const data = await getLatLon(city, api);
-		// console.log(`\nLat coord: ${data.lat} \nLon cooord: ${data.lon}\n`);
 		const lat = data.lat;
 		const lon = data.lon;
 		const res = await axios.get(
@@ -52,6 +53,7 @@ const fetchWeather = async (city, api) => {
 		console.log('______________________________\n');
 		displayCountryCity(weatherData.name, weatherData.sys.country);
     	displayWeatherDesc(weatherData.weather[0].description)
+		console.log("\n")
 		displayTemps(weatherData.main);
 		console.log("\n")
 	} catch (e) {
