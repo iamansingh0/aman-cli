@@ -1,5 +1,6 @@
 const { default: axios } = require('axios');
 const { getTime } = require('./getTime')
+
 const getLatLon = async (city, api) => {
 	// console.log(city, api)
 	const res = await axios.get(
@@ -50,9 +51,20 @@ const fetchWeather = async (city, api) => {
 		console.log(weatherData);
 		console.log('______________________________\n');
 		displayCountryCity(weatherData.sys.country);
-		getTime(weatherData.timezone, weatherData.dt)
     	displayWeatherDesc(weatherData.weather[0].description)
-		console.log("\n")
+		var sunTimes = [{
+			Sunrise: getTime(weatherData.timezone, weatherData.sys.sunrise),
+			Sunset: getTime(weatherData.timezone, weatherData.sys.sunset)
+		  }];
+		  
+		  console.log('  ---------------------');
+		  sunTimes.forEach(function(time) {
+			console.log(`| Sunrise:  ${time.Sunrise} |`);
+			console.log(`| Sunset :  ${time.Sunset} |`);
+			console.log('  --------------------');
+		  });
+		  
+		// console.log("\n")
 		displayTemps(weatherData.main);
 		console.log("\n")
 	} catch (e) {
