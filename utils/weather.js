@@ -1,5 +1,5 @@
 const { default: axios } = require('axios');
-
+const { getTime } = require('./getTime')
 const getLatLon = async (city, api) => {
 	// console.log(city, api)
 	const res = await axios.get(
@@ -23,9 +23,9 @@ const displayTemps = (data) => {
 	console.log(`Humidity: ${humidity}%`)
 }
 
-const displayCountryCity = (city, countryCode) => {
+const displayCountryCity = (countryCode) => {
 	const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
-	console.log(`Country: ${regionNames.of(countryCode)}\nCity: ${city}`);
+	console.log(`Country: ${regionNames.of(countryCode)}`);
 };
 
 const displayWeatherDesc = desc => {
@@ -38,8 +38,6 @@ const displayWeatherDesc = desc => {
   console.log(str2)
 };
 
-
-
 const fetchWeather = async (city, api) => {
 	try {
 		const data = await getLatLon(city, api);
@@ -49,9 +47,10 @@ const fetchWeather = async (city, api) => {
 			`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api}`
 		);
 		const weatherData = res.data;
-		console.log(weatherData.main);
+		console.log(weatherData);
 		console.log('______________________________\n');
-		displayCountryCity(weatherData.name, weatherData.sys.country);
+		displayCountryCity(weatherData.sys.country);
+		getTime(weatherData.timezone, weatherData.dt)
     	displayWeatherDesc(weatherData.weather[0].description)
 		console.log("\n")
 		displayTemps(weatherData.main);
