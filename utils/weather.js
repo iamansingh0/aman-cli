@@ -2,10 +2,10 @@ const { default: axios } = require('axios');
 
 const { getTime } = require('./getTime');
 const chalk = require('chalk');
-const { getLatLon } = require('../methods/getLatLon');
-const { displayTemps } = require('../methods/displayTemp');
-const { displayCountry } = require('../methods/dispCountry');
-const { displayWeatherDesc } = require('../methods/dispWeatherDesc');
+const { getLatLon } = require('./methods/getLatLon');
+const { displayTemps } = require('./methods/displayTemp');
+const { displayCountry } = require('./methods/dispCountry');
+const { displayWeatherDesc } = require('./methods/dispWeatherDesc');
 
 const fetchWeather = async (city, api) => {
 	const { default: boxen } = await import('boxen');
