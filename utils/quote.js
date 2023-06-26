@@ -1,21 +1,27 @@
 const axios = require('axios');
 const chalk = require('chalk');
+const { displayWeatherDesc } = require('./methods/dispWeatherDesc')
 
 const fetchQuote = async (tag = 'wisdom', limit = 1) => {
-	console.log(tag)
-    const { default: boxen } = await import('boxen');
+	// console.log(tag);
+	const { default: boxen } = await import('boxen');
 	try {
 		const response = await axios.get(
 			`https://api.quotable.io/quotes/random?limit=${limit}&tags=${tag}`
 		);
+		const newTag = displayWeatherDesc(tag)
 		const data = response.data[0].content;
 		const author = response.data[0].author;
-		const coloredQuote = chalk.cyan(`${data} ~ by ${author}`);
+		const coloredQuote = chalk.magentaBright(`${data} \n~ by ${author}`);
 		const boxedQuote = boxen(coloredQuote, {
-			padding: 1,
 			margin: 1,
-			borderStyle: 'double',
-			borderColor: 'yellow'
+			float: 'center',
+			padding: 1.5,
+			borderStyle: 'round',
+			borderColor: 'blue',
+			backgroundColor: '#EBE7DC',
+			title: `${newTag} Quote`,
+			titleAlignment: 'center',
 		});
 		console.log(boxedQuote);
 	} catch (error) {
