@@ -22,6 +22,7 @@ const fetchQuote = async (tag = 'wisdom', limit = 1) => {
 			backgroundColor: '#EBE7DC',
 			title: `${newTag} Quote`,
 			titleAlignment: 'center',
+			width: 60
 		});
 		console.log(boxedQuote);
 	} catch (error) {

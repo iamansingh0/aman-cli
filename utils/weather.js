@@ -77,7 +77,7 @@ const fetchWeather = async (city, api) => {
 				backgroundColor: '#EBE7DC',
 				title: 'Weather Report', 
 				titleAlignment: 'center',
-				textAlignment: 'center'
+				textAlignment: 'center',
 			}
 		);
 		console.log(boxed)
