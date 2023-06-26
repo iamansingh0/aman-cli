@@ -38,6 +38,7 @@
 		"meow": "^9.0.0"
 	},
 	"devDependencies": {
+		"esm": "^3.2.25",
 		"prettier": "^2.8.8"
 	}
 }

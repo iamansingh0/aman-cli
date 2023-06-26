@@ -5,7 +5,7 @@ const displayWeatherDesc = desc => {
 		arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
 	}
 	const str2 = arr.join(' ');
-	console.log(str2);
+	return str2;
 };
 
 module.exports = {

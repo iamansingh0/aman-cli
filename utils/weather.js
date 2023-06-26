@@ -1,12 +1,14 @@
 const { default: axios } = require('axios');
+
 const { getTime } = require('./getTime');
-const { getLatLon } = require('../methods/getLatLon')
-const { displayTemps } = require('../methods/displayTemp')
-const { displayCountry } = require('../methods/dispCountry')
-const { displayWeatherDesc } = require('../methods/dispWeatherDesc')
+const chalk = require('chalk');
+const { getLatLon } = require('../methods/getLatLon');
+const { displayTemps } = require('../methods/displayTemp');
+const { displayCountry } = require('../methods/dispCountry');
+const { displayWeatherDesc } = require('../methods/dispWeatherDesc');
 
 const fetchWeather = async (city, api) => {
-	// const { default: boxen } = require('boxen');
+	const { default: boxen } = await import('boxen');
 	try {
 		const data = await getLatLon(city, api);
 		const lat = data.lat;
@@ -15,28 +17,54 @@ const fetchWeather = async (city, api) => {
 			`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api}`
 		);
 		const weatherData = res.data;
-		// console.log(weatherData);
-		console.log('______________________________\n');
-		displayCountry(weatherData.sys.country);
-		displayWeatherDesc(weatherData.weather[0].description);
-		var sunTimes = [
+		const t = displayTemps(weatherData.main, weatherData.wind);
+		const print = {
+			Country: chalk.red(
+				`${displayCountry(weatherData.sys.country)}`
+			),
+			Sunrise: chalk.yellow(
+				`${getTime(weatherData.timezone, weatherData.sys.sunrise)}`
+			),
+			Sunset: chalk.yellow(
+				`${getTime(weatherData.timezone, weatherData.sys.sunset)}`
+			),
+			CurrentTemp: chalk.bold.blue(`${t.temp} °C`),
+			FeelsLike: chalk.bold.white(`${t.feels_like} °C`),
+			MinimumTemp: chalk.bold.white(`${t.temp_min} °C`),
+			MaximumTemp: chalk.bold.white(`${t.temp_max} °C`),
+			Humidity: chalk.bold.blue(`${t.humidity}%`),
+			WindSpeed: chalk.bold.blue(`${t.wind}mph`),
+			labelMinTemp: chalk.bold.white('Minimum Temp: '),
+			labelMaxTemp: chalk.bold.white('Maximum Temp: ')
+		};
+		const boxed = boxen(
+			[
+				`${chalk.bold.blue("Country: ")} ${print.Country}`,
+				``,
+				`${chalk.bold.white(
+					`   [ ${displayWeatherDesc(weatherData.weather[0].description)} ]`
+				)}`,
+				``,
+				`${chalk.bold.blue("Sunrise: ")} ${print.Sunrise}`,
+				`${chalk.bold.blue("Sunset : ")} ${print.Sunset}`,
+				``,
+				`${print.CurrentTemp}`,
+				`${print.labelMinTemp} ${print.MinimumTemp}`,
+				`${print.labelMaxTemp} ${print.MaximumTemp}`
+			].join('\n'),
 			{
-				Sunrise: getTime(weatherData.timezone, weatherData.sys.sunrise),
-				Sunset: getTime(weatherData.timezone, weatherData.sys.sunset)
+				margin: 1,
+				float: 'center',
+				padding: 1.5,
+				borderStyle: 'round',
+				borderColor: 'red',
+				backgroundColor: 'white',
+				title: 'Weather Report', 
+				titleAlignment: 'center'
 			}
-		];
-
-		console.log('  ---------------------');
-		sunTimes.forEach(function (time) {
-			console.log(`| Sunrise:  ${time.Sunrise} |`);
-			console.log(`| Sunset :  ${time.Sunset} |`);
-			console.log('  --------------------');
-		});
-
-		// console.log("\n")
-		displayTemps(weatherData.main, weatherData.wind);
-		// console.log("\n
-		console.log('______________________________\n');
+		);
+		// console.log(print.MinimumTemp)
+		console.log(boxed)
 	} catch (e) {
 		console.log(e);
 	}
