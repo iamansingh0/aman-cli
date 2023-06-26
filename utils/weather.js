@@ -7,6 +7,16 @@ const { displayTemps } = require('./methods/displayTemp');
 const { displayCountry } = require('./methods/dispCountry');
 const { displayWeatherDesc } = require('./methods/dispWeatherDesc');
 
+const drawCircle = (temp) => {
+	const radius = 10; 
+	const symbol = '●'; 
+	const space = ' '; 
+	const numSymbols = Math.floor((temp + 50) / 10); 
+	const numSpaces = Math.floor((100 - temp + 50) / 10); 
+	const circle = `${symbol.repeat(numSymbols)}${space.repeat(numSpaces)}`;
+	return circle;
+};
+
 const fetchWeather = async (city, api) => {
 	const { default: boxen } = await import('boxen');
 	try {
@@ -18,52 +28,58 @@ const fetchWeather = async (city, api) => {
 		);
 		const weatherData = res.data;
 		const t = displayTemps(weatherData.main, weatherData.wind);
+		// console.log(t)
 		const print = {
 			Country: chalk.red(
 				`${displayCountry(weatherData.sys.country)}`
 			),
-			Sunrise: chalk.yellow(
+			Sunrise: chalk.magenta(
 				`${getTime(weatherData.timezone, weatherData.sys.sunrise)}`
 			),
-			Sunset: chalk.yellow(
+			Sunset: chalk.magenta(
 				`${getTime(weatherData.timezone, weatherData.sys.sunset)}`
 			),
 			CurrentTemp: chalk.bold.blue(`${t.temp} °C`),
-			FeelsLike: chalk.bold.white(`${t.feels_like} °C`),
+			FL: chalk.bold.gray(`${t.feels_like} °C`),
 			MinimumTemp: chalk.bold.white(`${t.temp_min} °C`),
 			MaximumTemp: chalk.bold.white(`${t.temp_max} °C`),
-			Humidity: chalk.bold.blue(`${t.humidity}%`),
-			WindSpeed: chalk.bold.blue(`${t.wind}mph`),
-			labelMinTemp: chalk.bold.white('Minimum Temp: '),
-			labelMaxTemp: chalk.bold.white('Maximum Temp: ')
+			Humidity: chalk.bold.magentaBright(`${t.humidity}%`),
+			WindSpeed: chalk.bold.magentaBright(`${t.wind}mph`),
+			labelMinTemp: chalk.bold.blue('Minimum Temp: '),
+			labelMaxTemp: chalk.bold.blue('Maximum Temp: ')
 		};
+
 		const boxed = boxen(
 			[
 				`${chalk.bold.blue("Country: ")} ${print.Country}`,
 				``,
-				`${chalk.bold.white(
-					`   [ ${displayWeatherDesc(weatherData.weather[0].description)} ]`
+				`${chalk.bold.black.bgYellowBright(
+					`[ ${displayWeatherDesc(weatherData.weather[0].description)} ]`
 				)}`,
+				``,
+				`${print.CurrentTemp}`,
 				``,
 				`${chalk.bold.blue("Sunrise: ")} ${print.Sunrise}`,
 				`${chalk.bold.blue("Sunset : ")} ${print.Sunset}`,
 				``,
-				`${print.CurrentTemp}`,
-				`${print.labelMinTemp} ${print.MinimumTemp}`,
-				`${print.labelMaxTemp} ${print.MaximumTemp}`
+				`${chalk.bold.blue("Feels Like: ")} ${print.FL}`,
+				``,
+				`${chalk.bold.blue("Humidity: ")} ${print.Humidity} | ${chalk.bold.blue("Wind: ")} ${print.WindSpeed}`,
+				`${print.labelMinTemp} ${print.MinimumTemp} | ${print.labelMaxTemp} ${print.MaximumTemp}`,
+				``
 			].join('\n'),
 			{
 				margin: 1,
 				float: 'center',
 				padding: 1.5,
 				borderStyle: 'round',
-				borderColor: 'red',
+				borderColor: 'blue',
 				backgroundColor: 'white',
 				title: 'Weather Report', 
-				titleAlignment: 'center'
+				titleAlignment: 'center',
+				textAlignment: 'center'
 			}
 		);
-		// console.log(print.MinimumTemp)
 		console.log(boxed)
 	} catch (e) {
 		console.log(e);
