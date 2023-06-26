@@ -1,6 +1,5 @@
 const { default: axios } = require('axios');
 const { getTime } = require('./getTime');
-const chalk = require('chalk');
 const { getLatLon } = require('../methods/getLatLon')
 const { displayTemps } = require('../methods/displayTemp')
 const { displayCountry } = require('../methods/dispCountry')
