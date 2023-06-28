@@ -15,15 +15,20 @@ aman quote - Get a random quote
 aman weather [city name] - To see the current weather of the city
 ```
 
-### Joke and Quote
-<p align="left">
-  <img src="joke.png">
+<h2>Joke and Quote</h2>
+<p>
+  <img src="joke.png" width="420px" height="180px"  align="left">
+  <img src="qoute.png" width="420px" height="180px"  align="right">
+  <br/>
+  <p><b>Commands</b></p>
+  <p>aman joke</p>
+  <p>aman qoute --flag</p>
+  <p>aman weather city</p>
+  <p align="center">
+    <h2>Weather</h2>
+  </p>
+  <p align="center">
+    <img src="weather.png">
+  </p>
 </p>
-<p align="right">
-  <img src="qoute.png">
-</p>
-<br />
-<p align="center">
-  <img src="weather.png">
-</p>
-<br />
+
