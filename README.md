@@ -14,3 +14,16 @@ aman joke - Get a random joke
 aman quote - Get a random quote
 aman weather [city name] - To see the current weather of the city
 ```
+
+### Joke and Quote
+<p align="left">
+  <img src="joke.png">
+</p>
+<p align="right">
+  <img src="qoute.png">
+</p>
+<br />
+<p align="center">
+  <img src="weather.png">
+</p>
+<br />
