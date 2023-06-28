@@ -19,9 +19,5 @@ aman weather [city name] - To see the current weather of the city
 <p>
   <img src="joke.png" width="400px" height="180px"  align="left">
   <img src="qoute.png" width="400px" height="180px"  align="right">
-  <br/>
-  <p align="center">
-    <img src="weather.png">
-  </p>
 </p>
 
