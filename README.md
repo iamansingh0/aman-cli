@@ -21,6 +21,9 @@ aman weather [city name] - To see the current weather of the city
   <img src="qoute.png" width="350px" height="170px"  align="right">
 </p>
 <hr/>
+<hr/>
+<hr/>
+<hr/>
 <p align="center">
     <img src="weather.png">
 </p>
