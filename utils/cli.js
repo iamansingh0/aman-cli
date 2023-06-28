@@ -47,7 +47,7 @@ const flags = {
 };
 
 const commands = {
-	help: { desc: `working...` },
+	help: { desc: `aman command --option` },
 	joke: { desc: `gets a random joke from a free api` },
 	quote: { desc: `gets a random quote from an author` },
 	weather: { desc: `gets the weather of the city you asked after writing weather` }
